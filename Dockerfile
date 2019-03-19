@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.9
 
 ENV GOPATH="/go" \
     AccessFolder="/mnt" \
@@ -8,6 +8,8 @@ ENV GOPATH="/go" \
     ConfigName=".rclone.conf" \
     MountCommands="--allow-other --allow-non-empty" \
     UnmountCommands="-u -z"
+
+ENV GOLANG_VERSION 1.12.1
 
 ## Alpine with Go Git
 RUN apk add --no-cache --update alpine-sdk ca-certificates go git fuse fuse-dev tree \
