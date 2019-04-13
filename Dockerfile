@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:edge
 
 ENV GOPATH="/go" \
     AccessFolder="/mnt" \
@@ -12,8 +12,8 @@ ENV GOPATH="/go" \
 ## Alpine with Go Git
 RUN apk add --no-cache --update alpine-sdk ca-certificates go git fuse fuse-dev tree wget tzdata \
         && cd /tmp \
-	&& wget -q https://downloads.rclone.org/v1.46/rclone-v1.46-linux-amd64.zip \
-        && unzip /tmp/rclone-v1.46-linux-amd64.zip \
+	&& wget -q https://github.com/ncw/rclone/releases/download/v1.47.0/rclone-v1.47.0-linux-amd64.zip \
+        && unzip /tmp/rclone-v1.47.0-linux-amd64.zip \
         && mv /tmp/rclone-*-linux-amd64/rclone /usr/sbin \
         && rm -r /tmp/rclone* \
 	&& apk del alpine-sdk go git \
