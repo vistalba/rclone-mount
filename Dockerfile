@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine
 
 ENV GOPATH="/go" \
     AccessFolder="/mnt" \
