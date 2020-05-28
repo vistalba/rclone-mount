@@ -1,7 +1,3 @@
-[rcloneurl]: https://rclone.org
-
-[![rclone.org](https://rclone.org/img/rclone-120x120.png)][rcloneurl]
-
 Rclone Mount Container
 ---
 
