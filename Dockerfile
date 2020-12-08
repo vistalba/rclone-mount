@@ -12,8 +12,8 @@ ENV GOPATH="/go" \
 ## Alpine with Go Git
 RUN apk add --no-cache --update alpine-sdk ca-certificates go git fuse fuse-dev tree wget tzdata \
         && cd /tmp \
-	&& wget -q https://downloads.rclone.org/v1.53.3/rclone-v1.53.3-linux-amd64.zip \
-        && unzip /tmp/rclone-v1.53.3-linux-amd64.zip \
+	&& wget -q https://beta.rclone.org/branch/fix-4395-list-bwlimit/v1.54.0-beta.4959.d7c84b094.fix-4395-list-bwlimit/rclone-v1.54.0-beta.4959.d7c84b094.fix-4395-list-bwlimit-linux-amd64.zip \
+        && unzip /tmp/rclone-v1.54.0-beta.4959.d7c84b094.fix-4395-list-bwlimit-linux-amd64.zip \
         && mv /tmp/rclone-*-linux-amd64/rclone /usr/sbin \
         && rm -r /tmp/rclone* \
 	&& apk del alpine-sdk go git \
