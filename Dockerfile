@@ -10,12 +10,12 @@ ENV GOPATH="/go" \
     UnmountCommands="-u -z"
 
 ## Alpine with Go Git
-RUN apk add --no-cache --update alpine-sdk ca-certificates go git fuse fuse-dev tree \
-	&& go install github.com/rclone/rclone@latest \
-	&& cp /go/bin/rclone /usr/sbin/ \
-	&& rm -rf /go \
-	&& apk del alpine-sdk go git \
-	&& rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*
+RUN apk add --no-cache --update alpine-sdk ca-certificates go git fuse fuse-dev tree
+RUN go install github.com/rclone/rclone@latest
+RUN cp /go/bin/rclone /usr/sbin/
+RUN rm -rf /go
+RUN apk del alpine-sdk go git
+RUN rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*
 
 ADD start.sh /start.sh
 RUN chmod +x /start.sh 
