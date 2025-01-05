@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:latest as builder
 
 ENV GOPATH="/go" \
     AccessFolder="/mnt" \
@@ -12,10 +12,20 @@ ENV GOPATH="/go" \
 ## Alpine with Go Git
 RUN apk add --no-cache --update alpine-sdk ca-certificates go git fuse fuse-dev tree
 RUN go install github.com/rclone/rclone@latest
-RUN cp /go/bin/rclone /usr/sbin/
-RUN rm -rf /go
-RUN apk del alpine-sdk go git
-RUN rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*
+
+FROM alpine:latest
+
+ENV GOPATH="/go" \
+    AccessFolder="/mnt" \
+    RemotePath="mediaefs:" \
+    MountPoint="/mnt/mediaefs" \
+    ConfigDir="/config" \
+    ConfigName=".rclone.conf" \
+    MountCommands="--allow-other --allow-non-empty" \
+    UnmountCommands="-u -z"
+
+COPY --from=builder /go/bin/rclone  /usr/sbin/rclone
+RUN apk add --no-cache --update ca-certificates fuse fuse-dev tree
 
 ADD start.sh /start.sh
 RUN chmod +x /start.sh 
